@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+
 @section('main')
 <section class="section-4 bg-2">    
     <div class="container pt-5">
