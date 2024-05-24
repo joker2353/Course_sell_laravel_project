@@ -347,6 +347,7 @@ File:: delete(public_path('/profile_pic/thumb/'.Auth::user()->image));
     public function enrollment(){
         $enroll=CourseApplication::where('user_id',Auth::user()->id)
         ->with(['course','course.applications'])
+        
         ->orderBy('created_at','DESC')
         ->paginate(10);
         //dd($jobapps);
@@ -366,14 +367,14 @@ File:: delete(public_path('/profile_pic/thumb/'.Auth::user()->image));
         ])->first();
 
         if($japp==null){
-            session()->flash('success','Application not found');
+            session()->flash('success','Enrollment not found');
         return response()->json([
             'status'=>false
         ]);
         }
         CourseApplication::where('id',$request->id)->delete();
 
-        session()->flash('success','Application removed successfully');
+        session()->flash('success','Enrollment removed successfully');
         return response()->json([
             'status'=>true
         ]);
