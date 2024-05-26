@@ -20,7 +20,7 @@
             <li class="list-group-item d-flex justify-content-between p-3">
                 <a href="{{ route('account.profile') }}">Account Settings</a>
             </li>
-            @if(Auth::user()->changeRole==0 && Auth::user()->role!='admin' )
+            @if(Auth::user()->changeRole==0 && Auth::user()->role!='admin' && Auth::user()->role!='publisher' )
             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <a href="{{ route('account.pubreq') }}">Request for pulisher</a>
             </li>

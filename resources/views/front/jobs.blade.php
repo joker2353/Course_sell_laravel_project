@@ -110,7 +110,7 @@
 <script>
     $("#searchForm").submit(function(e)){
         e.preventDefault();
-        var url='{{ route("jobs") }}?';
+        var url='{{ route("courses") }}?';
         var keyword=$("#keyword").val();
         var category=$("#category").val();
         if(keyword!=""){

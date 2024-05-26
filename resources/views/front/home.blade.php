@@ -16,7 +16,7 @@
 <section class="section-1 py-5 "> 
     <div class="container">
         <div class="card border-0 shadow p-5">
-            <form action="{{ route('jobs') }}" method="GET">
+            <form action="{{ route('Home') }}" method="GET">
             <div class="row">
                 <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
                     <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Keywords">
@@ -61,7 +61,7 @@
 
            <div class="col-lg-4 col-xl-3 col-md-6">
             <div class="single_catagory">
-                <a href="{{ route('jobs').'?category='.$category->id }}"><h4 class="pb-2">{{ $category->name }}</h4></a>
+                <a href="{{ route('courses').'?category='.$category->id }}"><h4 class="pb-2">{{ $category->name }}</h4></a>
                 <p class="mb-0"> <span>0</span> Available position</p>
             </div>
            </div>

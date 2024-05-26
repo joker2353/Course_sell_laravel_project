@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('front.home');
 // });
 Route::get('/',[HomeController::class,'homepage'])->name('Home');
-Route::get('/coures',[CourseController::class,'index'])->name('jobs');
+Route::get('/courses',[CourseController::class,'index'])->name('courses');
 Route::get('/courses/detail/{id}',[CourseController::class,'detail'])->name('jobDetail');
 Route::post('/apply-course',[CourseController::class,'apply'])->name('apply');
 Route::post('/save-course',[CourseController::class,'saveCourse'])->name('saveCourse');
@@ -26,29 +26,29 @@ Route::post('/process-reset-password',[AccountController::class,'processResetPas
 
 Route::get('/account/register',[AccountController::class,'register'])->name('account.register')->middleware('redAuth');
 Route::post('/account/register-process',[AccountController::class,'registerProcess'])->name('account.registerProcess')->middleware('redAuth');
-Route::get('/account/login',[AccountController::class,'login'])->name('account.login')->middleware('redAuth');
-Route::post('/account/auth',[AccountController::class,'auth'])->name('account.auth')->middleware('redAuth');
+Route::get('/account/login',[AccountController::class,'login'])->name('account.login');
+Route::post('/account/auth',[AccountController::class,'auth'])->name('account.auth');
 
 
-Route::get('/account/profile',[AccountController::class,'profile'])->name('account.profile')->middleware('auth');
+Route::get('/account/profile',[AccountController::class,'profile'])->name('account.profile');
 Route::put('/account/update-profile',[AccountController::class,'updateProfile'])->name('account.updateProfile')->middleware('auth');
 Route::post('/account/update-password',[AccountController::class,'updatePass'])->name('account.updatePass')->middleware('auth');
 Route::post('/account/update-profile-pic',[AccountController::class,'updateProPic'])->name('account.updateProPic')->middleware('auth');
 Route::get('/account/logout',[AccountController::class,'logout'])->name('account.logout')->middleware('auth');
 
 
-Route::get('/account/create-job',[AccountController::class,'createJob'])->name('account.createJob')->middleware('auth');
+
 Route::get('/account/create-course',[AccountController::class,'createCourse'])->name('account.createCourse')->middleware('auth');
 
-Route::post('/account/save-job',[AccountController::class,'saveJob'])->name('account.saveJob')->middleware('auth');
+
 Route::post('/account/save-Course',[AccountController::class,'saveCourse'])->name('account.saveCourse')->middleware('auth');
 
 
-Route::get('/account/my-jobs',[AccountController::class,'myJobs'])->name('account.myJobs')->middleware('auth');
+
 Route::get('/account/my-courses',[AccountController::class,'myCourses'])->name('account.myCourses')->middleware('auth');
 
 
-Route::get('/account/my-jobs/edit/{jobId}',[AccountController::class,'editJob'])->name('account.editJob')->middleware('auth');
+
 Route::get('/account/my-courses/edit/{courseId}',[AccountController::class,'editCourse'])->name('account.editCourse')->middleware('auth');
 
 
@@ -63,7 +63,7 @@ Route::any('/account/media/{cId}',[CourseController::class,'media'])->name('acco
 Route::any('/account/pub-req',[AccountController::class,'pubReq'])->name('account.pubreq')->middleware('auth');
 
 
-Route::get('/account/applications',[AccountController::class,'applications'])->name('account.applications')->middleware('auth');
+
 Route::get('/account/enrollments',[AccountController::class,'enrollment'])->name('account.enrollment')->middleware('auth');
 
 
@@ -96,5 +96,6 @@ Route::any('/admin/enrollments/delete',[CourseApplicationController::class,'dest
 
 
 
-Route::any('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
+Route::any('/checkout/{price}/{title}', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
+
 Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');

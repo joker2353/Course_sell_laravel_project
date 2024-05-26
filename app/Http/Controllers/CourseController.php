@@ -75,54 +75,65 @@ class CourseController extends Controller
 
 
 
-    public function apply(Request $request){
-         $id=$request->id;
-
-         $course=Course::where('id',$id)->first();
-
-         if($course==null){
-            session()->flash('error','Course does not exist');
-            return response()->json([
-                'status'=>false,
-                'message'=>'Course does not exist'
-            ]);
-         }
-       
-          $t_id=$course->user_id;
-          
-          if($t_id==Auth::user()->id){
-            session()->flash('error','You can not buy your own course');
-            return response()->json([
-                'status'=>false,
-                'message'=>'You can not buy your own course'
-            ]);
-          }
-
-          //cannot apply for a job twice
-          $jappCount=CourseApplication::where([
-            'user_id'=>Auth::user()->id,
-            'course_id'=>$id
-          ])->count();
-          if($jappCount>0){
-            session()->flash('error','You have already applied');
-            return response()->json([
-                'status'=>false,
-                'message'=>'You have already applied'
-            ]);
-          }
-
-         
-          $application=new CourseApplication();
-          $application->course_id=$id;
-          $application->user_id=Auth::user()->id;
-          $application->t_id=$t_id;
-          $application->applied_date=now();
-         $application->save();
-
-          session()->flash('success','Enrolled successfully');
-          return redirect()->route('chekcout');
-
-    }
+    public function apply(Request $request) {
+      $id = $request->id;
+  
+      $course = Course::where('id', $id)->first();
+  
+      if ($course == null) {
+          session()->flash('error', 'Course does not exist');
+          return response()->json([
+              'status' => false,
+              'message' => 'Course does not exist'
+          ]);
+      }
+  
+      $t_id = $course->user_id;
+  
+      if ($t_id == Auth::user()->id) {
+          session()->flash('error', 'You cannot buy your own course');
+          return response()->json([
+              'status' => false,
+              'message' => 'You cannot buy your own course'
+          ]);
+      }
+  
+      // cannot apply for a job twice
+      $jappCount = CourseApplication::where([
+          'user_id' => Auth::user()->id,
+          'course_id' => $id
+      ])->count();
+  
+      if ($jappCount > 0) {
+          session()->flash('error', 'You have already applied');
+          return response()->json([
+              'status' => false,
+              'message' => 'You have already applied'
+          ]);
+      }
+  
+      $application = new CourseApplication();
+      $application->course_id = $id;
+      $application->user_id = Auth::user()->id;
+      $application->t_id = $t_id;
+      $application->applied_date = now();
+      $application->save();
+  
+      session()->flash('success', 'Enrolled successfully');
+  
+      // Return JSON response indicating success and the route to redirect
+      return response()->json([
+          'status' => true,
+          'message' => 'Enrolled successfully',
+          'redirect_url' => route('checkout', [
+            'price' => $course->price, 
+            'title' => $course->title]
+            )
+      ]);
+  }
+  
+  
+    
 
      public function saveCourse(Request $request){
         $id= $request->id;

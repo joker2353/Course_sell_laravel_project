@@ -34,7 +34,7 @@
                                     <tr>
                                         <th scope="col">Title</th>
                                         
-                                        <th scope="col">Applicants</th>
+                                        <th scope="col">Learners</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -48,7 +48,7 @@
                                                 <div class="info1">Duration: {{ $scourse->course->duration }} <br> Price: {{ $scourse->course->price }}</div>
                                             </td>
                                            
-                                            <td>{{ $scourse->course->applications->count() }} Applications</td>
+                                            <td>{{ $scourse->course->applications->count() }} students</td>
                                             <td>
                                                 @if($scourse->course->status==1)
                                                 <div class="job-status text-capitalize">active</div>
