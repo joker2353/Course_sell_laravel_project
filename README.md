@@ -127,9 +127,9 @@ Note: For stronger integrity, prefer server-side lookup by `course_id` when crea
 
 ```mermaid
 erDiagram
-  USERS ||--o{ COURSES : "publishes"
-  USERS ||--o{ COURSE_APPLICATIONS : "enrolls"
-  USERS ||--o{ SAVED_COURSES : "saves"
+  USERS ||--o{ COURSES : publishes
+  USERS ||--o{ COURSE_APPLICATIONS : enrolls
+  USERS ||--o{ SAVED_COURSES : saves
 
   CATEGORIES ||--o{ COURSES : categorizes
 
@@ -137,7 +137,7 @@ erDiagram
   COURSES ||--o{ SAVED_COURSES : has
 
   USERS {
-    bigint id PK
+    int id PK
     string name
     string email UNIQUE
     string password
@@ -149,42 +149,42 @@ erDiagram
   }
 
   CATEGORIES {
-    bigint id PK
+    int id PK
     string name
     int status
   }
 
   COURSES {
-    bigint id PK
+    int id PK
     string title
-    bigint category_id FK
-    bigint user_id FK
+    int category_id FK
+    int user_id FK
     string author
     string price
     int seat
     string duration
-    text description
-    text benefits
-    text prerequisite
+    string description
+    string benefits
+    string prerequisite
     string link
-    text keywords
+    string keywords
     string experience
     int status
     int isFeatured
   }
 
   COURSE_APPLICATIONS {
-    bigint id PK
-    bigint course_id FK
-    bigint user_id FK
-    bigint t_id FK
-    timestamp applied_date
+    int id PK
+    int course_id FK
+    int user_id FK
+    int t_id FK
+    datetime applied_date
   }
 
   SAVED_COURSES {
-    bigint id PK
-    bigint course_id FK
-    bigint user_id FK
+    int id PK
+    int course_id FK
+    int user_id FK
   }
 ```
 
